@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Technique - Site Terra Cotta</title>
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2691E;
+            --accent-color: #CD853F;
+            --light-terracotta: #DEB887;
+            --very-light-terracotta: #F5DEB3;
+            --dark-terracotta: #654321;
+            --text-dark: #2C1810;
+            --text-light: #6B4423;
+            --background-light: #FDF8F3;
+            --white: #FFFFFF;
+            --shadow: rgba(139, 69, 19, 0.1);
+            --gradient-primary: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+            --gradient-light: linear-gradient(135deg, #F5DEB3 0%, #DEB887 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background: var(--background-light);
+            color: var(--text-dark);
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 0;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px var(--shadow);
+            overflow: hidden;
+        }
+
+        .header {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 50px 0 25px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 35px 0 15px 0;
+            border-bottom: 2px solid var(--light-terracotta);
+            padding-bottom: 8px;
+        }
+
+        .info-box {
+            background: var(--gradient-light);
+            border: 2px solid var(--light-terracotta);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 8px 25px var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-box::before {
+            content: 'ℹ️';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            opacity: 0.3;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border: 2px solid #FF9800;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 8px 25px rgba(255, 152, 0, 0.1);
+            position: relative;
+        }
+
+        .warning-box::before {
+            content: '⚠️';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #E8F5E8 0%, #C8E6C9 100%);
+            border: 2px solid #4CAF50;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.1);
+            position: relative;
+        }
+
+        .success-box::before {
+            content: '✅';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+        }
+
+        .backup-info {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border: 2px solid #2196F3;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 8px 25px rgba(33, 150, 243, 0.1);
+            position: relative;
+        }
+
+        .backup-info::before {
+            content: '💾';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+        }
+
+        code {
+            background: var(--very-light-terracotta);
+            color: var(--dark-terracotta);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9rem;
+            border: 1px solid var(--light-terracotta);
+        }
+
+        pre {
+            background: var(--very-light-terracotta);
+            border: 2px solid var(--light-terracotta);
+            border-radius: 12px;
+            padding: 20px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            box-shadow: inset 0 2px 8px var(--shadow);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 25px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--light-terracotta);
+        }
+
+        th {
+            background: var(--gradient-primary);
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        tr:nth-child(even) {
+            background: var(--background-light);
+        }
+
+        tr:hover {
+            background: var(--very-light-terracotta);
+            transition: background 0.3s ease;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+
+        .toc {
+            background: var(--gradient-light);
+            border: 2px solid var(--light-terracotta);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .toc h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .toc li {
+            margin-bottom: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            padding: 12px 16px;
+            background: var(--white);
+            border-radius: 8px;
+            display: block;
+            transition: all 0.3s ease;
+            border: 1px solid var(--light-terracotta);
+        }
+
+        .toc a:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .method-card {
+            background: var(--white);
+            border: 2px solid var(--light-terracotta);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 8px 25px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .method-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--shadow);
+        }
+
+        .method-card h4 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .method-card.recommended {
+            border-color: var(--secondary-color);
+            background: linear-gradient(135deg, var(--white) 0%, var(--very-light-terracotta) 100%);
+        }
+
+        .method-card.recommended h4::before {
+            content: '⭐';
+        }
+
+        .method-card.alternative h4::before {
+            content: '🔄';
+        }
+
+        .screenshot-container {
+            background: var(--white);
+            border: 2px solid var(--light-terracotta);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .screenshot-container img {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .footer {
+            background: var(--gradient-primary);
+            color: var(--white);
+            text-align: center;
+            padding: 40px;
+            margin-top: 50px;
+        }
+
+        .footer p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .toc ul {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 12px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏺 Documentation Technique</h1>
+            <div class="subtitle">Site Terra Cotta - WordPress 6.8.1</div>
+        </div>
+        
+        <div class="content">
+            <div class="toc">
+                <h3>📋 Table des matières</h3>
+                <ul>
+                    <li><a href="#sauvegarde">1. Fichiers du site + base de données</a></li>
+                    <li><a href="#restauration">2. Instructions de restauration</a></li>
+                    <li><a href="#acces">3. Accès à l'administration</a></li>
+                    <li><a href="#structure">4. Structure du site</a></li>
+                    <li><a href="#plugins">5. Liste des plugins utilisés</a></li>
+                    <li><a href="#captures">6. Captures d'écran recommandées</a></li>
+                    <li><a href="#navigation">7. Logique de navigation</a></li>
+                    <li><a href="#choix">8. Justification des choix techniques</a></li>
+                    <li><a href="#references">9. Références</a></li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <strong>📅 Dates de création :</strong> du 25 juin au 1er juillet 2025<br>
+                <strong>🌐 URL du site :</strong> www.terracotta.com/terracotta<br>
+                <strong>📊 Version WordPress :</strong> 6.8.1<br>
+                <strong>🐘 Version PHP :</strong> 8.2.18<br>
+                <strong>🗄️ Base de données :</strong> MySQL 8.3.0
+            </div>
+
+        <section id="sauvegarde">
+            <h2>1. 📦 Fichiers du site + base de données (sauvegarde complète)</h2>
+            
+            <div class="backup-info">
+                <h3>🔄 Méthode 1 : Sauvegarde complète WordPress (RECOMMANDÉE)</h3>
+                <p><strong>Fichiers fournis :</strong></p>
+                <ul>
+                    <li><strong>terracotta_wordpress_complete.zip</strong> - Archive complète du site WordPress</li>
+                    <li><strong>terracotta_database.sql</strong> - Export de la base de données</li>
+                </ul>
+                <p><strong>Avantages :</strong> Restauration plus simple et plus rapide, tous les fichiers sont déjà organisés</p>
+            </div>
+
+            <div class="info-box">
+                <h3>🔄 Méthode 2 : Sauvegardes UpdraftPlus (alternative)</h3>
+                <p><strong>Dernière sauvegarde complète :</strong> 2 juillet 2025 à 07:00</p>
+                
+                <table>
+                    <tr>
+                        <th>Type de fichier</th>
+                        <th>Nom du fichier</th>
+                        <th>Taille</th>
+                        <th>Date</th>
+                    </tr>
+                    <tr>
+                        <td>Base de données</td>
+                        <td>backup_2025-07-02-0700_Terra_Cotta_cacadb9e5a70-db.gz</td>
+                        <td>463 KB</td>
+                        <td>02/07/2025</td>
+                    </tr>
+                    <tr>
+                        <td>Plugins</td>
+                        <td>backup_2025-07-02-0700_Terra_Cotta_cacadb9e5a70-plugins.zip</td>
+                        <td>32 MB</td>
+                        <td>02/07/2025</td>
+                    </tr>
+                    <tr>
+                        <td>Thèmes</td>
+                        <td>backup_2025-07-02-0700_Terra_Cotta_cacadb9e5a70-themes.zip</td>
+                        <td>7.1 MB</td>
+                        <td>02/07/2025</td>
+                    </tr>
+                    <tr>
+                        <td>Uploads</td>
+                        <td>backup_2025-07-02-0700_Terra_Cotta_cacadb9e5a70-uploads.zip</td>
+                        <td>9.8 MB</td>
+                        <td>02/07/2025</td>
+                    </tr>
+                    <tr>
+                        <td>Autres fichiers</td>
+                        <td>backup_2025-07-02-0700_Terra_Cotta_cacadb9e5a70-others.zip</td>
+                        <td>3.6 MB</td>
+                        <td>02/07/2025</td>
+                    </tr>
+                    <tr>
+                        <td>MU-Plugins</td>
+                        <td>backup_2025-07-02-0700_Terra_Cotta_cacadb9e5a70-mu-plugins.zip</td>
+                        <td>1.9 KB</td>
+                        <td>02/07/2025</td>
+                    </tr>
+                </table>
+                
+                <div class="warning-box">
+                    <strong>⚠️ Important :</strong> Tous les fichiers de sauvegarde UpdraftPlus se trouvent dans le dossier <code>wp-content/updraft/</code>
+                </div>
+            </div>
+        </section>
+
+        <section id="restauration">
+            <h2>2. 🔧 Instructions de restauration du site à partir de la sauvegarde</h2>
+            
+            <h3>Prérequis</h3>
+            <ul>
+                <li>Serveur web avec PHP 8.2+ et MySQL 8.0+</li>
+                <li>Accès FTP ou SSH au serveur</li>
+                <li>Base de données MySQL vide</li>
+            </ul>
+
+            <div class="method-card recommended">
+                <h4>Méthode 1 : Restauration avec sauvegarde complète WordPress (RECOMMANDÉE)</h4>
+                <ol>
+                    <li><strong>Préparation de l'environnement :</strong>
+                        <ul>
+                            <li>Installer un serveur web local (WAMP/XAMPP/MAMP)</li>
+                            <li>Créer une base de données MySQL vide</li>
+                            <li>Configurer les paramètres de connexion</li>
+                        </ul>
+                    </li>
+                    <li><strong>Restauration des fichiers :</strong>
+                        <ul>
+                            <li>Extraire <code>terracotta_wordpress_complete.zip</code> dans le dossier web</li>
+                            <li>Modifier le fichier <code>wp-config.php</code> avec les paramètres de connexion</li>
+                        </ul>
+                    </li>
+                    <li><strong>Restauration de la base de données :</strong>
+                        <ul>
+                            <li>Importer <code>terracotta_database.sql</code> dans la base de données via phpMyAdmin ou ligne de commande</li>
+                            <li>Mettre à jour les URLs dans la base de données si nécessaire</li>
+                        </ul>
+                    </li>
+                    <li><strong>Configuration finale :</strong>
+                        <ul>
+                            <li>Vérifier les permissions des dossiers (755 pour les dossiers, 644 pour les fichiers)</li>
+                            <li>Activer le thème principal et les plugins nécessaires</li>
+                            <li>Tester le site</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="method-card alternative">
+                <h4>Méthode 2 : Restauration avec sauvegardes UpdraftPlus (alternative)</h4>
+                <ol>
+                    <li><strong>Préparation de l'environnement :</strong>
+                        <ul>
+                            <li>Installer WordPress (version 6.8.1 recommandée)</li>
+                            <li>Configurer la base de données MySQL</li>
+                            <li>Modifier le fichier <code>wp-config.php</code> avec les paramètres de connexion</li>
+                        </ul>
+                    </li>
+                    <li><strong>Restauration des fichiers :</strong>
+                        <ul>
+                            <li>Extraire <code>backup_2025-07-02-0700_Terra_Cotta_cacadb9e5a70-plugins.zip</code> dans <code>wp-content/plugins/</code></li>
+                            <li>Extraire <code>backup_2025-07-02-0700_Terra_Cotta_cacadb9e5a70-themes.zip</code> dans <code>wp-content/themes/</code></li>
+                            <li>Extraire <code>backup_2025-07-02-0700_Terra_Cotta_cacadb9e5a70-uploads.zip</code> dans <code>wp-content/uploads/</code></li>
+                            <li>Extraire <code>backup_2025-07-02-0700_Terra_Cotta_cacadb9e5a70-others.zip</code> dans <code>wp-content/</code></li>
+                        </ul>
+                    </li>
+                    <li><strong>Restauration de la base de données :</strong>
+                        <ul>
+                            <li>Décompresser <code>backup_2025-07-02-0700_Terra_Cotta_cacadb9e5a70-db.gz</code></li>
+                            <li>Importer le fichier SQL dans la base de données via phpMyAdmin ou ligne de commande</li>
+                        </ul>
+                    </li>
+                    <li><strong>Configuration finale :</strong>
+                        <ul>
+                            <li>Activer le thème principal</li>
+                            <li>Activer les plugins nécessaires</li>
+                            <li>Vérifier les permissions des dossiers (755 pour les dossiers, 644 pour les fichiers)</li>
+                            <li>Mettre à jour les URLs dans la base de données si nécessaire</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <h3>Émuler le nom de domaine en local</h3>
+            <div class="info-box">
+                <strong>Pour accéder à votre site local via www.terracotta.com, modifiez le fichier <code>hosts</code> de votre ordinateur :</strong>
+                <ul>
+                    <li><strong>Sous Windows :</strong>
+                        <ol>
+                            <li>Ouvrez le Bloc-notes en tant qu'administrateur.</li>
+                            <li>Ouvrez le fichier <code>C:\Windows\System32\drivers\etc\hosts</code></li>
+                            <li>Ajoutez la ligne suivante à la fin du fichier :</li>
+                        </ol>
+                        <pre>127.0.0.1   www.terracotta.com</pre>
+                        <ol start="4">
+                            <li>Enregistrez et fermez le fichier.</li>
+                        </ol>
+                    </li>
+                    <li><strong>Sous Mac/Linux :</strong>
+                        <ol>
+                            <li>Ouvrez un terminal.</li>
+                            <li>Tapez la commande <code>sudo nano /etc/hosts</code></li>
+                            <li>Ajoutez la ligne suivante :</li>
+                        </ol>
+                        <pre>127.0.0.1   www.terracotta.com</pre>
+                        <ol start="4">
+                            <li>Enregistrez (Ctrl+O), puis quittez (Ctrl+X).</li>
+                        </ol>
+                    </li>
+                </ul>
+                <p><strong>Après cette modification, tapez <code>www.terracotta.com</code> dans votre navigateur pour accéder à votre site local.</strong></p>
+            </div>
+
+        </section>
+
+        <section id="acces">
+            <h2>3. 🔐 Accès à l'administration (login/mdp)</h2>
+            
+            <div class="warning-box">
+                <strong>🔒 Informations de connexion :</strong><br>
+                <strong>URL d'administration :</strong> <code>www.terracotta.com/terracotta/login/</code><br>
+                <strong>Email :</strong> maxime@mlentmt.be ou it@mail.com<br>
+                <strong>Mot de passe :</strong> CMS2025eafc (maxime@mlentmt.be)/ EAFC2025cms(it@mail.com)<br>
+                
+            </div>
+
+            <h3>Récupération de mot de passe</h3>
+            <p>En cas d'oubli du mot de passe :</p>
+            <ol>
+                <li>Aller sur <code>www.terracotta.com/terracotta/wp-login.php?action=lostpassword</code></li>
+                <li>Saisir l'adresse email associée au compte</li>
+                <li>Suivre les instructions reçues par email</li>
+            </ol>
+
+            <h3>Sécurité recommandée</h3>
+            <ul>
+                <li>Changer le préfixe des tables de base de données (actuellement <code>wp_</code>)</li>
+                <li>Utiliser des mots de passe forts</li>
+                <li>Activer l'authentification à deux facteurs</li>
+                <li>Limiter les tentatives de connexion</li>
+            </ul>
+        </section>
+
+        <section id="structure">
+            <h2>4. 🏗️ Présentation de la structure du site</h2>
+            
+            <h3>Architecture générale</h3>
+            <pre>
+terracotta/
+├── wp-admin/          # Interface d'administration WordPress
+├── wp-content/        # Contenu personnalisé
+│   ├── plugins/       # Extensions installées
+│   ├── themes/        # Thèmes disponibles
+│   ├── uploads/       # Fichiers médias
+│   └── updraft/       # Sauvegardes
+├── wp-includes/       # Fichiers système WordPress
+├── wp-config.php      # Configuration principale
+└── index.php          # Point d'entrée
+            </pre>
+
+            <h3>Thèmes installés</h3>
+            <table>
+                <tr>
+                    <th>Thème</th>
+                    <th>Statut</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Astra</td>
+                    <td>Actif</td>
+                    <td>Thème principal - Rapide et personnalisable</td>
+                </tr>
+            </table>
+
+            <h3>Structure des uploads</h3>
+            <ul>
+                <li><strong>2024/</strong> - Fichiers médias de 2024</li>
+                <li><strong>2025/</strong> - Fichiers médias de 2025</li>
+                <li><strong>astra-sites/</strong> - Templates Astra</li>
+            </ul>
+        </section>
+
+        <section id="plugins">
+            <h2>5. 🔌 Liste des plugins utilisés avec explication du choix</h2>
+            
+            <table>
+                <tr>
+                    <th>Plugin</th>
+                    <th>Statut</th>
+                    <th>Version</th>
+                    <th>Justification</th>
+                </tr>
+                <tr>
+                    <td><strong>Astra Sites</strong></td>
+                    <td>Actif</td>
+                    <td>4.6.0</td>
+                    <td>Import de templates préconçus pour Astra, accélère le développement</td>
+                </tr>
+                <tr>
+                    <td><strong>UpdraftPlus</strong></td>
+                    <td>Actif</td>
+                    <td>1.25.6</td>
+                    <td>Sauvegarde automatique et restauration facile du site</td>
+                </tr>
+                <tr>
+                    <td><strong>SecuPress</strong></td>
+                    <td>Actif</td>
+                    <td>2.3.20.1</td>
+                    <td>Sécurité renforcée, détection de malwares, protection contre les attaques</td>
+                </tr>
+                <tr>
+                    <td><strong>Yoast SEO</strong></td>
+                    <td>Actif</td>
+                    <td>22.7</td>
+                    <td>Optimisation pour les moteurs de recherche, analyse de mots-clés</td>
+                </tr>
+                <tr>
+                    <td><strong>Ultimate Addons for Gutenberg</strong></td>
+                    <td>Actif</td>
+                    <td>2.0.0</td>
+                    <td>Blocs Gutenberg supplémentaires pour enrichir l'éditeur</td>
+                </tr>
+                <tr>
+                    <td><strong>SureForms</strong></td>
+                    <td>Actif</td>
+                    <td>1.0.0</td>
+                    <td>Création de formulaires de contact personnalisés</td>
+                </tr>
+                <tr>
+                    <td><strong>SureMails</strong></td>
+                    <td>Actif</td>
+                    <td>1.0.0</td>
+                    <td>Gestion avancée des emails et notifications</td>
+                </tr>
+                <tr>
+                    <td><strong>Akismet</strong></td>
+                    <td>Inactif</td>
+                    <td>5.3</td>
+                    <td>Protection anti-spam pour les commentaires</td>
+                </tr>
+            </table>
+
+            <h3>Choix techniques justifiés</h3>
+            <ul>
+                <li><strong>Astra + Astra Sites :</strong> Performance optimale et facilité de personnalisation</li>
+                <li><strong>UpdraftPlus :</strong> Solution de sauvegarde fiable et complète</li>
+                <li><strong>SecuPress :</strong> Protection de sécurité de niveau professionnel</li>
+                <li><strong>Yoast SEO :</strong> Standard de l'industrie pour l'optimisation SEO</li>
+                <li><strong>Gutenberg Addons :</strong> Extension de l'éditeur natif WordPress</li>
+            </ul>
+        </section>
+
+        <section id="captures">
+            <h2>6. 📸 Captures d'écran des réglages clés</h2>
+            <p><strong>Captures d'écran recommandées à prendre :</strong></p>
+
+            <div>
+                <h3>🏠 Page d'accueil du site (desktop)</h3>
+                <img src="fichier image/Capture d'écran 2025-07-02 003454.png" alt="Capture de la page d'accueil Terra Cotta (desktop)" style="width:100%;max-width:800px;border-radius:8px;">
+                <p>Capture de la page principale montrant la structure et le design (version bureau)</p>
+            </div>
+
+            <div>
+                <h3>🏠 Page d'accueil du site (mobile)</h3>
+                <img src="fichier image/Capture d'écran 2025-07-02 003326.png" alt="Capture de la page d'accueil Terra Cotta (mobile)" style="width:100%;max-width:400px;border-radius:8px;">
+                <p>Affichage mobile de la page d'accueil pour illustrer le responsive design.</p>
+            </div>
+
+            <div>
+                <h3>⚙️ Tableau de bord WordPress</h3>
+                <img src="fichier image/Capture d'écran 2025-07-02 003559.png" alt="Vue d'ensemble du tableau de bord WordPress" style="width:100%;max-width:800px;border-radius:8px;">
+                <p>Vue d'ensemble de l'administration avec les widgets principaux</p>
+            </div>
+
+            <div>
+                <h3>🔌 Extensions installées</h3>
+                <img src="fichier image/Capture d'écran 2025-07-02 003111.png" alt="Liste des extensions installées sur le site" style="width:100%;max-width:800px;border-radius:8px;">
+                <p>Liste des plugins actifs et inactifs sur le site Terra Cotta</p>
+            </div>
+
+            <div>
+                <h3>🎨 Personnalisation du thème Astra : Typographie</h3>
+                <img src="fichier image/Capture d'écran 2025-07-02 003647.png" alt="Réglages de la typographie dans Astra" style="width:100%;max-width:400px;border-radius:8px;">
+                <p>Paramètres de police et de taille pour le thème Astra</p>
+            </div>
+
+            <div>
+                <h3>🎨 Personnalisation du thème Astra : Couleurs</h3>
+                <img src="fichier image/Capture d'écran 2025-07-02 003702.png" alt="Réglages des couleurs dans Astra" style="width:100%;max-width:400px;border-radius:8px;">
+                <p>Palette de couleurs globale et couleurs du thème</p>
+            </div>
+
+            <div>
+                <h3>🎨 Personnalisation du thème Astra : Boutons</h3>
+                <img src="fichier image/Capture d'écran 2025-07-02 003727.png" alt="Réglages des boutons dans Astra" style="width:100%;max-width:340px;border-radius:8px;">
+                <p>Styles et couleurs des boutons principaux</p>
+            </div>
+
+            <div>
+                <h3>🎨 Personnalisation du thème Astra : Container</h3>
+                <img src="fichier image/Capture d'écran 2025-07-02 003741.png" alt="Réglages du container dans Astra" style="width:100%;max-width:340px;border-radius:8px;">
+                <p>Largeur et style du container principal du site</p>
+            </div>
+
+            <div>
+                <h3>🏠 Page d'accueil du site (desktop, vue large)</h3>
+                <img src="fichier image/Capture d'écran 2025-07-02 004331.png" alt="Capture de la page d'accueil Terra Cotta (desktop, vue large)" style="width:100%;max-width:800px;border-radius:8px;">
+                <p>Autre vue de la page d'accueil en version large</p>
+            </div>
+
+            <div>
+                <h3>🛡️ Sécurité SecuPress</h3>
+                <img src="fichier image/secupress.png" alt="Tableau de bord de sécurité SecuPress" style="width:100%;max-width:900px;border-radius:8px;">
+                <p>Tableau de bord de SecuPress montrant l'état de la sécurité du site, les recommandations et les alertes.</p>
+            </div>
+
+            <div class="screenshot-container">
+                <h3>🔎 Score de lisibilité des articles (Yoast SEO)</h3>
+                <img src="fichier image/image.png" alt="Score de lisibilité des articles Yoast SEO" style="max-width:400px;">
+                <p>Exemple de score de lisibilité pour les articles, généré par Yoast SEO. Tous les articles sont jugés bons.</p>
+            </div>
+            <div class="screenshot-container">
+                <h3>🔎 Score de lisibilité des pages (Yoast SEO)</h3>
+                <img src="fichier image/image_3.png" alt="Score de lisibilité des pages Yoast SEO" style="max-width:400px;">
+                <p>Exemple de score de lisibilité pour les pages, généré par Yoast SEO. La majorité des pages sont jugées bonnes.</p>
+            </div>
+            <div class="screenshot-container">
+                <h3>🛠️ Tableau de bord des analyses SEO et lisibilité (Yoast SEO)</h3>
+                <img src="fichier image/image_2.png" alt="Tableau de bord SEO et lisibilité Yoast" style="max-width:700px;">
+                <p>Vue d'ensemble des fonctionnalités d'analyse SEO, lisibilité et IA proposées par Yoast SEO.</p>
+            </div>
+        </section>
+
+        <section id="navigation">
+            <h2>7. 🧭 Description de la logique de navigation</h2>
+            
+            <h3>Structure de navigation principale</h3>
+            <ul>
+                <li><strong>Page d'accueil :</strong> Présentation générale du site Terra Cotta</li>
+                <li><strong>À propos :</strong> Informations sur l'entreprise et ses valeurs</li>
+                <li><strong>Services :</strong> Catalogue des produits et services en terre cuite</li>
+                <li><strong>Portfolio :</strong> Galerie de réalisations et projets</li>
+                <li><strong>Contact :</strong> Formulaire de contact et informations de localisation</li>
+            </ul>
+
+            <h3>Navigation secondaire</h3>
+            <ul>
+                <li><strong>Blog :</strong> Articles sur les techniques de terre cuite</li>
+                <li><strong>FAQ :</strong> Questions fréquentes sur les produits</li>
+                <li><strong>Devis :</strong> Demande de devis personnalisé</li>
+            </ul>
+
+            <h3>Logique UX/UI</h3>
+            <ul>
+                <li><strong>Design intuitif :</strong> Navigation claire et accessible</li>
+                <li><strong>Responsive :</strong> Adaptation automatique aux différents écrans</li>
+                <li><strong>Performance :</strong> Chargement rapide des pages</li>
+                <li><strong>Accessibilité :</strong> Respect des standards WCAG</li>
+            </ul>
+        </section>
+
+        <section id="choix">
+            <h2>8. 🎯 Justification des choix techniques et esthétiques</h2>
+            
+            <h3>Choix techniques</h3>
+            <ul>
+                <li><strong>WordPress 6.8.1 :</strong> Version stable et sécurisée avec support Gutenberg</li>
+                <li><strong>Thème Astra :</strong> Performance optimale, personnalisation avancée, compatibilité Gutenberg</li>
+                <li><strong>PHP 8.2.18 :</strong> Version récente avec améliorations de performance et sécurité</li>
+                <li><strong>MySQL 8.3.0 :</strong> Base de données robuste et performante</li>
+                <li><strong>Architecture modulaire :</strong> Facilité de maintenance et d'évolution</li>
+            </ul>
+
+            <h3>Choix esthétiques</h3>
+            <ul>
+                <li><strong>Palette de couleurs terre :</strong> Cohérence avec l'identité "Terra Cotta"</li>
+                <li><strong>Typographie lisible :</strong> Police moderne et accessible</li>
+                <li><strong>Design épuré :</strong> Mise en valeur du contenu et des produits</li>
+                <li><strong>Images de qualité :</strong> Présentation professionnelle des réalisations</li>
+                <li><strong>Espacement généreux :</strong> Lecture confortable et navigation aisée</li>
+            </ul>
+
+            <h3>Références d'inspiration</h3>
+            <ul>
+                <li><strong>www.auxcouleursdargile.be :</strong> Design artisanal et chaleureux</li>
+                <li><strong>www.oselaterre.be :</strong> Approche naturelle et authentique</li>
+                <li><strong>www.adobecolor.be :</strong> Palette de couleurs harmonieuses</li>
+            </ul>
+        </section>
+
+        <section id="references">
+            <h2>9. 📚 Références (tutos, documentation consultée, etc.)</h2>
+            
+            <h3>Ressources techniques</h3>
+            <ul>
+                <li><strong>WPMarmite :</strong> <a href="https://youtu.be/pYdHwBYZk2I?si=xWa_JyKW1wvFZDPa" target="_blank">Tutoriel WordPress complet</a></li>
+                <li><strong>Sucuri Security :</strong> <a href="https://sucuri.net/wordpress-security-plugin/" target="_blank">Documentation sécurité WordPress</a></li>
+                <li><strong>EAFC CMS1 :</strong> Cours général sur les systèmes de gestion de contenu</li>
+            </ul>
+
+            <h3>Sites de référence</h3>
+            <ul>
+                <li><strong>Aux Couleurs d'Argile :</strong> <a href="http://www.auxcouleursdargile.be" target="_blank">www.auxcouleursdargile.be</a></li>
+                <li><strong>Ose la Terre :</strong> <a href="http://www.oselaterre.be" target="_blank">www.oselaterre.be</a></li>
+                <li><strong>Adobe Color :</strong> <a href="http://www.adobecolor.be" target="_blank">www.adobecolor.be</a></li>
+            </ul>
+
+            <h3>Documentation officielle</h3>
+            <ul>
+                <li><strong>WordPress.org :</strong> Documentation officielle WordPress</li>
+                <li><strong>Astra Theme :</strong> Guide de personnalisation</li>
+                <li><strong>Yoast SEO :</strong> Guide d'optimisation SEO</li>
+                <li><strong>UpdraftPlus :</strong> Documentation de sauvegarde</li>
+            </ul>
+
+            <h3>Outils utilisés</h3>
+            <ul>
+                <li><strong>WAMP :</strong> Environnement de développement local</li>
+                <li><strong>FileZilla :</strong> Client FTP pour la gestion des fichiers</li>
+                <li><strong>phpMyAdmin :</strong> Gestion de la base de données</li>
+                <li><strong>Chrome DevTools :</strong> Débogage et optimisation</li>
+            </ul>
+        </section>
+
+        <div class="info-box">
+            <h3>📝 Notes importantes</h3>
+            <ul>
+                <li>Cette documentation doit être mise à jour lors de chaque modification importante</li>
+                <li>Conserver les sauvegardes dans un endroit sécurisé</li>
+                <li>Effectuer des tests de restauration réguliers</li>
+                <li>Maintenir les plugins et thèmes à jour</li>
+                <li>Surveiller les performances et la sécurité</li>
+            </ul>
+        </div>
+
+        <footer style="text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid #ddd; color: #666;">
+            <p><strong>Documentation créée le 1er juillet 2025</strong><br>
+            Site Terra Cotta - WordPress 6.8.1</p>
+        </footer>
+    </div>
+</body>
+</html> 

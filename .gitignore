@@ -1,0 +1,42 @@
+# WordPress
+wp-config.php
+wp-content/uploads/
+wp-content/updraft/
+wp-content/cache/
+wp-content/backup-db/
+wp-content/advanced-cache.php
+wp-content/wp-cache-config.php
+
+# Logs
+*.log
+error_log
+access_log
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Node modules (si utilisé)
+node_modules/
+
+# Database backups
+*.sql.gz
+*.sql.zip
+
+# Sensitive files
+*.env
+.env.*
+
